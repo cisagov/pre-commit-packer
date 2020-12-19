@@ -1,7 +1,7 @@
 - id: packer_validate
   name: Packer Validate
   description: This hook runs `packer validate` on appropriate files.
-  entry: packer_validate.sh
+  entry: hooks/packer_validate.sh
   language: script
   files: ^(packer\.json|.*\.pkr\.hcl)$
   pass_filenames: true
@@ -10,7 +10,7 @@
 - id: packer_fmt
   name: Packer Format
   description: This hook runs `packer fmt` on appropriate files.
-  entry: packer_fmt.sh
+  entry: hooks/packer_fmt.sh
   language: script
   files: (\.pkr\.hcl)$
   pass_filenames: true
