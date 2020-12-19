@@ -17,7 +17,7 @@ projects using [Packer](https://www.packer.io/).
 ```yaml
 repos:
   - repo: https://github.com/cisagov/pre-commit-packer
-    rev: v1.0.0
+    rev: <version> # Version from https://github.com/cisagov/pre-commit-packer/releases
     hooks:
       - id: packer_validate
         args:
