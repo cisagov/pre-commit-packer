@@ -3,7 +3,7 @@
   description: This hook runs `packer validate` on appropriate files.
   entry: hooks/packer_validate.sh
   language: script
-  files: ^(packer\.json|.*\.pkr\.hcl)$
+  files: (packer\.json|\.pkr\.hcl)$
   pass_filenames: true
   always_run: true
 

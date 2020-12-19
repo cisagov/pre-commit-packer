@@ -27,8 +27,8 @@ repos:
 
 ## Notes about the `packer_validate` hook ##
 
-This hook matches `packer.json` and any file ending in `.pkr.hcl` by default.
-Files can be added for checking manually as additional arguments.
+This hook matches any paths ending in `packer.json` and `.pkr.hcl` by default.
+File paths can be added for checking manually as additional arguments.
 
 ## Contributing ##
 
