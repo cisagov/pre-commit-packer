@@ -1,23 +1,34 @@
-# skeleton-generic #
+# pre-commit-packer #
 
-[![GitHub Build Status](https://github.com/cisagov/skeleton-generic/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-generic/actions)
+[![GitHub Build Status](https://github.com/cisagov/pre-commit-packer/workflows/build/badge.svg)](https://github.com/cisagov/pre-commit-packer/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub project started.
-This skeleton project contains [licensing information](LICENSE), as
-well as [pre-commit hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
+This is a set of [pre-commit](https://pre-commit.com) hooks intended for
+projects using [Packer](https://www.packer.io/).
 
-In many cases you will instead want to use one of the more specific
-skeleton projects derived from this one.
+## Available Hooks ##
 
-## New Repositories from a Skeleton ##
+| Hook name         | Description                                             |
+| ----------------- | ------------------------------------------------------- |
+| `packer_validate` | Validate all Packer templates.                          |
+| `packer_fmt`      | Check that Packer HCL templates are properly formatted. |
 
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
+## Usage ##
+
+```yaml
+repos:
+  - repo: https://github.com/cisagov/pre-commit-packer
+    rev: v1.0.0
+    hooks:
+      - id: packer_validate
+        args:
+          - manual_file_entry
+      - id: packer_fmt
+```
+
+## Notes about the `packer_validate` hook ##
+
+This hook matches `packer.json` and any file ending in `.pkr.hcl` by default.
+Files can be added for checking manually as additional arguments.
 
 ## Contributing ##
 
