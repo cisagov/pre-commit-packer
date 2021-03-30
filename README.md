@@ -29,8 +29,8 @@ Step into the repository you want to have the pre-commit hooks installed and run
 git init
 cat <<EOF > .pre-commit-config.yaml
 repos:
-- repo: https://github.com/schniber/pre-commit-packer
-  rev: <VERSION> # Get the latest from: https://github.com/schniber/pre-commit-packer/releases
+- repo: https://github.com/schniber/pre-commit-packer-1
+  rev: <VERSION> # Get the latest from: https://github.com/schniber/pre-commit-packer-1/releases
   hooks:
       - id: packer_fmt
       - id: packer_validate
