@@ -1,29 +1,28 @@
 #!/usr/bin/env bash
+set -e
 
-set -o nounset
-set -o errexit
-set -o pipefail
+declare -a paths
 
-if [ -z "$(command -v packer)" ]
-then
-  echo "packer is required"
-  exit 1
-fi
+index=0
 
-error=0
+for file_with_path in "$@"; do
+  file_with_path="${file_with_path// /__REPLACED__SPACE__}"
 
-for file in "$@"
-do
-  if ! packer fmt -check "$file"
-  then
-    error=1
-    echo
-    echo "Failed path: $file"
-    echo "================================"
-  fi
+  paths[index]=$(dirname "$file_with_path")
+  (("index+=1"))
 done
 
-if [[ $error -ne 0 ]]
-then
-  exit 1
-fi
+for path_uniq in $(echo "${paths[*]}" | tr ' ' '\n' | sort -u); do
+  path_uniq="${path_uniq//__REPLACED__SPACE__/ }"
+
+  pushd "$path_uniq" > /dev/null
+  packer fmt "$path_uniq"
+  popd > /dev/null
+done
+
+# *.pkrvars.hcl not located in the main directory are excluded by `packer fmt`
+IFS=
+pkrvars_dir=$(dirname "$(find . -path ./git -prune -false -o -name '*.pkrvars.hcl' -print -quit)")
+echo "$pkrvars_dir"
+cd "$pkrvars_dir"
+packer fmt .
