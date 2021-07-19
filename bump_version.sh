@@ -11,14 +11,13 @@ README_FILE=README.md
 
 HELP_INFORMATION="bump_version.sh (show|major|minor|patch|prerelease|build|finalize)"
 
-old_version=$(<"$VERSION_FILE")
+old_version=$(< "$VERSION_FILE")
 
-if [ $# -ne 1 ]
-then
+if [ $# -ne 1 ]; then
   echo "$HELP_INFORMATION"
 else
   case $1 in
-    major|minor|patch|prerelease|build)
+    major | minor | patch | prerelease | build)
       new_version=$(python -c "import semver; print(semver.bump_$1('$old_version'))")
       echo Changing version from "$old_version" to "$new_version"
       tmp_file=/tmp/version.$$

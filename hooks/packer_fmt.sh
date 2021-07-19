@@ -4,18 +4,15 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
-if [ -z "$(command -v packer)" ]
-then
+if [ -z "$(command -v packer)" ]; then
   echo "packer is required"
   exit 1
 fi
 
 error=0
 
-for file in "$@"
-do
-  if ! packer fmt -check "$file"
-  then
+for file in "$@"; do
+  if ! packer fmt -check "$file"; then
     error=1
     echo
     echo "Failed path: $file"
@@ -23,7 +20,6 @@ do
   fi
 done
 
-if [[ $error -ne 0 ]]
-then
+if [[ $error -ne 0 ]]; then
   exit 1
 fi
