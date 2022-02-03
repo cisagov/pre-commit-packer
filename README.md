@@ -7,10 +7,10 @@ projects using [Packer](https://www.packer.io/).
 
 ## Available Hooks ##
 
-| Hook name         | Description                                             |
-| ----------------- | ------------------------------------------------------- |
-| `packer_validate` | Validate all Packer templates.                          |
-| `packer_fmt`      | Check that Packer HCL templates are properly formatted. |
+| Hook name         | Description                                                                           |
+| ----------------- |---------------------------------------------------------------------------------------|
+| `packer_validate` | Validate all Packer templates.                                                        |
+| `packer_fmt`      | Check that Packer HCL templates are properly formatted, formatting files when needed. |
 
 ## Usage ##
 

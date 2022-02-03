@@ -13,6 +13,7 @@ error=0
 
 for file in "$@"; do
   if ! packer fmt -check "$file"; then
+    packer fmt -write "$file"
     error=1
     echo
     echo "Failed path: $file"
