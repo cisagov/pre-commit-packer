@@ -12,6 +12,8 @@ fi
 error=0
 
 for file in "$@"; do
+  echo "$file"
+  echo >&2 "$file (stderr)"
   if ! packer validate "$file"; then
     error=1
     echo
@@ -19,6 +21,8 @@ for file in "$@"; do
     echo "================================"
   fi
 done
+
+exit 1
 
 if [[ $error -ne 0 ]]; then
   exit 1
