@@ -6,7 +6,6 @@
   language: script
   files: \.pkr\.hcl$
   pass_filenames: true
-  always_run: true
 
 - id: packer_fmt
   name: Packer Format
