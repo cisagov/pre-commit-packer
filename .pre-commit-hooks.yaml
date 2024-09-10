@@ -4,14 +4,13 @@
   description: This hook runs `packer validate` on appropriate files.
   entry: hooks/packer_validate.sh
   language: script
-  files: (packer\.json|\.pkr\.hcl)$
+  files: \.pkr\.hcl$
   pass_filenames: true
-  always_run: true
 
 - id: packer_fmt
   name: Packer Format
   description: This hook runs `packer fmt` on appropriate files.
   entry: hooks/packer_fmt.sh
   language: script
-  files: (\.pkr\.hcl)$
+  files: \.pkr(?:vars)?\.hcl$
   pass_filenames: true
