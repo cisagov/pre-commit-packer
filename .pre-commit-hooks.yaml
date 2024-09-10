@@ -6,6 +6,7 @@
   language: script
   files: \.pkr\.hcl$
   pass_filenames: true
+  require_serial: true
 
 - id: packer_fmt
   name: Packer Format
