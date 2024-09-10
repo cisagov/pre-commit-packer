@@ -11,6 +11,8 @@
   name: Packer Format
   description: This hook runs `packer fmt` on appropriate files.
   entry: hooks/packer_fmt.sh
+  args:
+    - -check
   language: script
   files: \.pkr(?:vars)?\.hcl$
   pass_filenames: true

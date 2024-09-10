@@ -9,10 +9,26 @@ if [ -z "$(command -v packer)" ]; then
   exit 1
 fi
 
+args=()
+files=()
+
+while (("$#")); do
+  case "$1" in
+    -*)
+      args+=("$1")
+      shift
+      ;;
+    *)
+      files+=("$1")
+      shift
+      ;;
+  esac
+done
+
 error=0
 
-for file in "$@"; do
-  if ! packer fmt -check "$file"; then
+for file in "${files[@]}"; do
+  if ! packer fmt "${args[@]}" "$file"; then
     error=1
     echo
     echo "Failed path: $file"
