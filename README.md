@@ -20,15 +20,8 @@ repos:
     rev: v0.0.2
     hooks:
       - id: packer_validate
-        args:
-          - manual_file_entry
       - id: packer_fmt
 ```
-
-## Notes about the `packer_validate` hook ##
-
-This hook matches any paths ending in `packer.json` and `.pkr.hcl` by default.
-File paths can be added for checking manually as additional arguments.
 
 ## Contributing ##
 
