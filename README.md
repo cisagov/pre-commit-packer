@@ -9,8 +9,8 @@ projects using [Packer](https://www.packer.io/).
 
 | Hook name         | Description                                             |
 | ----------------- | ------------------------------------------------------- |
-| `packer_validate` | Validate all Packer templates.                          |
 | `packer_fmt`      | Check that Packer HCL templates are properly formatted. |
+| `packer_validate` | Validate all Packer templates.                          |
 
 ## Usage ##
 
@@ -19,8 +19,8 @@ repos:
   - repo: https://github.com/cisagov/pre-commit-packer
     rev: v0.0.2
     hooks:
-      - id: packer_validate
       - id: packer_fmt
+      - id: packer_validate
 ```
 
 ## Contributing ##
