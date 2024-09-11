@@ -5,8 +5,6 @@
   entry: hooks/packer_validate.sh
   language: script
   files: \.pkr\.hcl$
-  pass_filenames: true
-  require_serial: true
 
 - id: packer_fmt
   name: Packer Format
@@ -16,4 +14,3 @@
     - -check
   language: script
   files: \.pkr(?:vars)?\.hcl$
-  pass_filenames: true
