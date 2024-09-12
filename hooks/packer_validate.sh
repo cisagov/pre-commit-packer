@@ -15,7 +15,11 @@ files=()
 while (("$#")); do
   case "$1" in
     -*)
-      args+=("$1")
+      if [ -f "$1" ]; then
+        files+=("$1")
+      else
+        args+=("$1")
+      fi
       shift
       ;;
     *)
@@ -28,7 +32,7 @@ done
 paths=()
 index=0
 for file in "${files[@]}"; do
-  paths[index]=$(dirname "$file")
+  paths[index]=$(dirname -- "$file")
   ((++index))
 done
 
@@ -38,7 +42,7 @@ while IFS='' read -r line; do unique_paths+=("$line"); done < <(printf '%s\n' "$
 error=0
 
 for path in "${unique_paths[@]}"; do
-  if ! packer validate "${args[@]}" "$path"; then
+  if ! packer validate "${args[@]}" -- "$path"; then
     error=1
     echo
     echo "Failed path: $path"
