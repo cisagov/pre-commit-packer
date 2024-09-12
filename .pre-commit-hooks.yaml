@@ -1,16 +1,17 @@
 ---
-- id: packer_validate
-  name: Packer Validate
-  description: This hook runs `packer validate` on appropriate files.
-  entry: hooks/packer_validate.sh
-  language: script
-  files: \.pkr\.hcl$
-
-- id: packer_fmt
-  name: Packer Format
+# Hooks should be listed alphabetically by id.
+- args:
+    - -check
   description: This hook runs `packer fmt` on appropriate files.
   entry: hooks/packer_fmt.sh
-  args:
-    - -check
-  language: script
   files: \.pkr(?:vars)?\.hcl$
+  id: packer_fmt
+  language: script
+  name: Packer Format
+
+- description: This hook runs `packer validate` on appropriate files.
+  entry: hooks/packer_validate.sh
+  files: \.pkr\.hcl$
+  id: packer_validate
+  language: script
+  name: Packer Validate
