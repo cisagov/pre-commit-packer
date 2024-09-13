@@ -7,10 +7,23 @@ projects using [Packer](https://www.packer.io/).
 
 ## Available Hooks ##
 
-| Hook name         | Description                                             |
-| ----------------- | ------------------------------------------------------- |
-| `packer_fmt`      | Check that Packer HCL templates are properly formatted. |
-| `packer_validate` | Validate all Packer templates.                          |
+> [!NOTE]
+> You can pass arguments to these hooks through the normal use of the `args` block
+> in your pre-commit configuration. These arguments should align with whatever options
+> you wish to pass to the underlying `packer` command. However, any arguments that
+> take values must be in the form `-argument=value` rather than `-argument value`
+> to ensure proper processing.
+
+### `packer_fmt` ###
+
+This hook checks that any `.pkr.hcl` or `.pkrvars.hcl` files are properly formatted
+using the `packer fmt` command. The hook will only check files by default, but that
+behavior can be overridden by changing the arguments passed to the hook.
+
+### `packer_validate` ###
+
+This hook checks that a Packer configuration is valid by running `packer validate`
+against any directory that houses `.pkr.hcl` files.
 
 ## Usage ##
 
