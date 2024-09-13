@@ -15,7 +15,11 @@ files=()
 while (("$#")); do
   case "$1" in
     -*)
-      args+=("$1")
+      if [ -f "$1" ]; then
+        files+=("$1")
+      else
+        args+=("$1")
+      fi
       shift
       ;;
     *)
@@ -28,7 +32,7 @@ done
 error=0
 
 for file in "${files[@]}"; do
-  if ! packer fmt "${args[@]}" "$file"; then
+  if ! packer fmt "${args[@]}" -- "$file"; then
     error=1
     echo
     echo "Failed path: $file"
