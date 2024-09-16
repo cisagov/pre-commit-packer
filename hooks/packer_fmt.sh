@@ -9,30 +9,18 @@ if [ -z "$(command -v packer)" ]; then
   exit 1
 fi
 
-args=()
-files=()
+# The version of readlink on macOS does not support long options
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+readonly SCRIPT_DIR
+# shellcheck source=lib/util.sh
+source "$SCRIPT_DIR/../lib/util.sh"
 
-while (("$#")); do
-  case "$1" in
-    -*)
-      if [ -f "$1" ]; then
-        files+=("$1")
-      else
-        args+=("$1")
-      fi
-      shift
-      ;;
-    *)
-      files+=("$1")
-      shift
-      ;;
-  esac
-done
+util::parse_cmdline "$@"
 
 error=0
 
-for file in "${files[@]}"; do
-  if ! packer fmt "${args[@]}" -- "$file"; then
+for file in "${FILES[@]}"; do
+  if ! packer fmt "${ARGS[@]}" -- "$file"; then
     error=1
     echo
     echo "Failed path: $file"

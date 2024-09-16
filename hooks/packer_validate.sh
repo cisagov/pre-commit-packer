@@ -9,40 +9,20 @@ if [ -z "$(command -v packer)" ]; then
   exit 1
 fi
 
-args=()
-files=()
+# The version of readlink on macOS does not support long options
+SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+readonly SCRIPT_DIR
+# shellcheck source=lib/util.sh
+source "$SCRIPT_DIR/../lib/util.sh"
 
-while (("$#")); do
-  case "$1" in
-    -*)
-      if [ -f "$1" ]; then
-        files+=("$1")
-      else
-        args+=("$1")
-      fi
-      shift
-      ;;
-    *)
-      files+=("$1")
-      shift
-      ;;
-  esac
-done
+util::parse_cmdline "$@"
 
-paths=()
-index=0
-for file in "${files[@]}"; do
-  paths[index]=$(dirname -- "$file")
-  ((++index))
-done
-
-unique_paths=()
-while IFS='' read -r line; do unique_paths+=("$line"); done < <(printf '%s\n' "${paths[@]}" | sort --unique)
+util::get_unique_directory_paths "${FILES[@]}"
 
 error=0
 
-for path in "${unique_paths[@]}"; do
-  if ! packer validate "${args[@]}" -- "$path"; then
+for path in "${UNIQUE_PATHS[@]}"; do
+  if ! packer validate "${ARGS[@]}" -- "$path"; then
     error=1
     echo
     echo "Failed path: $path"
