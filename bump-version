@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# bump_version.sh [--push] [--label LABEL] (major | minor | patch | prerelease | build | finalize | show)
+# bump-version [--push] [--label LABEL] (major | minor | patch | prerelease | build | finalize | show)
 
 set -o nounset
 set -o errexit
