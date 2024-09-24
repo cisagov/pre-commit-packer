@@ -9,7 +9,20 @@ set -o pipefail
 VERSION_FILE=config/version.txt
 README_FILE=README.md
 
-HELP_INFORMATION="bump_version.sh [--push] [--label LABEL] (major | minor | patch | prerelease | build | finalize | show)"
+USAGE=$(
+  cat << END_OF_LINE
+Update the version of the project.
+
+Usage:
+  ${0##*/} [--push] [--label LABEL] (major | minor | patch | prerelease | build | finalize | show)
+  ${0##*/} (-h | --help)
+
+Options:
+  -h | --help    Show this message.
+  --push         Perform a \`git push\` after updating the version.
+  --label LABEL  Specify the label to use when updating the build or prerelease version.
+END_OF_LINE
+)
 
 old_version=$(< "$VERSION_FILE")
 new_version="$old_version"
@@ -29,7 +42,7 @@ with_prerelease=false
 #######################################
 function invalid_option() {
   echo "$1"
-  echo "$HELP_INFORMATION"
+  echo "$USAGE"
   exit 1
 }
 
@@ -48,7 +61,8 @@ function bump_version() {
 }
 
 if [ $# -eq 0 ]; then
-  echo "$HELP_INFORMATION"
+  echo "$USAGE"
+  exit 1
 else
   while [ $# -gt 0 ]; do
     case $1 in
@@ -82,6 +96,10 @@ else
         ;;
       show)
         echo "$old_version"
+        exit 0
+        ;;
+      -h | --help)
+        echo "$USAGE"
         exit 0
         ;;
       *)
