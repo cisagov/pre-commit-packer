@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # bump-version [--push] [--label LABEL] (major | minor | patch | prerelease | build | finalize | show)
+# bump-version --list-files
 
 set -o nounset
 set -o errexit
@@ -17,12 +18,14 @@ Update the version of the project.
 
 Usage:
   ${0##*/} [--push] [--label LABEL] (major | minor | patch | prerelease | build | finalize | show)
+  ${0##*/} --list-files
   ${0##*/} (-h | --help)
 
 Options:
   -h | --help    Show this message.
   --push         Perform a \`git push\` after updating the version.
   --label LABEL  Specify the label to use when updating the build or prerelease version.
+  --list-files   List the files that will be updated when the version is bumped.
 END_OF_LINE
 )
 
@@ -105,6 +108,10 @@ else
         ;;
       -h | --help)
         echo "$USAGE"
+        exit 0
+        ;;
+      --list-files)
+        printf '%s\n' "${VERSION_FILES[@]}"
         exit 0
         ;;
       *)
