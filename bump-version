@@ -6,8 +6,10 @@ set -o nounset
 set -o errexit
 set -o pipefail
 
+# Stores the canonical version for the project.
 VERSION_FILE=config/version.txt
-README_FILE=README.md
+# Files that should be updated with the new version.
+VERSION_FILES=("$VERSION_FILE" README.md)
 
 USAGE=$(
   cat << END_OF_LINE
@@ -146,11 +148,16 @@ if [ "$with_prerelease" = true ]; then
 fi
 
 tmp_file=/tmp/version.$$
-sed "s/$old_version_regex/$new_version/" $VERSION_FILE > $tmp_file
-mv $tmp_file $VERSION_FILE
-sed "s/$old_version_regex/$new_version/" $README_FILE > $tmp_file
-mv $tmp_file $README_FILE
-git add $VERSION_FILE $README_FILE
+for version_file in "${VERSION_FILES[@]}"; do
+  if [ ! -f "$version_file" ]; then
+    echo Missing expected file: "$version_file"
+    exit 1
+  fi
+  sed "s/$old_version_regex/$new_version/" "$version_file" > $tmp_file
+  mv $tmp_file "$version_file"
+done
+
+git add "${VERSION_FILES[@]}"
 git commit --message "$commit_prefix version from $old_version to $new_version"
 
 if [ "$with_push" = true ]; then
