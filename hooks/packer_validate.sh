@@ -23,6 +23,8 @@ error=0
 
 for path in "${UNIQUE_PATHS[@]}"; do
   pushd "$path" > /dev/null
+
+  packer init . > /dev/null
   if ! packer validate "${ARGS[@]}" .; then
     error=1
     echo
