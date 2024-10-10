@@ -25,12 +25,16 @@ behavior can be overridden by changing the arguments passed to the hook.
 This hook checks that a Packer configuration is valid by running `packer validate`
 against any directory that houses `.pkr.hcl` files.
 
+> [!NOTE]
+> The hook will change to each directory and run `packer init` before running
+> `packer validate`.
+
 ## Usage ##
 
 ```yaml
 repos:
   - repo: https://github.com/cisagov/pre-commit-packer
-    rev: v0.1.0
+    rev: v0.2.0
     hooks:
       - id: packer_fmt
       - id: packer_validate
