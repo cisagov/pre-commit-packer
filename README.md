@@ -16,8 +16,8 @@ projects using [Packer](https://www.packer.io/).
 
 ### `packer_fmt` ###
 
-This hook checks that any `.pkr.hcl` or `.pkrvars.hcl` files are properly formatted
-using the `packer fmt` command. The hook will only check files by default, but that
+This hook ensures that any `.pkr.hcl` or `.pkrvars.hcl` files are properly formatted
+using the `packer fmt` command. The hook will update files by default, but that
 behavior can be overridden by changing the arguments passed to the hook.
 
 ### `packer_validate` ###
@@ -34,7 +34,7 @@ against any directory that houses `.pkr.hcl` files.
 ```yaml
 repos:
   - repo: https://github.com/cisagov/pre-commit-packer
-    rev: v0.2.0
+    rev: v0.3.0
     hooks:
       - id: packer_fmt
       - id: packer_validate
