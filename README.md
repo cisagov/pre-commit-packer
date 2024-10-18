@@ -34,7 +34,7 @@ against any directory that houses `.pkr.hcl` files.
 ```yaml
 repos:
   - repo: https://github.com/cisagov/pre-commit-packer
-    rev: v0.2.0
+    rev: v0.3.0-rc.1
     hooks:
       - id: packer_fmt
       - id: packer_validate
