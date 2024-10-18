@@ -1,8 +1,6 @@
 ---
 # Hooks should be listed alphabetically by id.
-- args:
-    - -check
-  description: This hook runs `packer fmt` on appropriate files.
+- description: This hook runs `packer fmt` on appropriate files.
   entry: hooks/packer_fmt.sh
   files: \.pkr(?:vars)?\.hcl$
   id: packer_fmt
