@@ -31,6 +31,8 @@ for path in "${UNIQUE_PATHS[@]}"; do
     echo "Failed path: $path"
     echo "================================"
   fi
+  
+  popd > /dev/null
 done
 
 if [[ $error -ne 0 ]]; then
