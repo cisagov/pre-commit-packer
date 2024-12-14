@@ -21,7 +21,10 @@ util::get_unique_directory_paths "${FILES[@]}"
 
 error=0
 
+echo "Processing paths in packer_validate" >> pre-commit-packer.log
 for path in "${UNIQUE_PATHS[@]}"; do
+  echo "$path" >> pre-commit-packer.log
+
   pushd "$path" > /dev/null
 
   packer init . > /dev/null

@@ -19,7 +19,10 @@ util::parse_cmdline "$@"
 
 error=0
 
+echo "Processing files in packer_fmt" >> pre-commit-packer.log
 for file in "${FILES[@]}"; do
+  echo "$file" >> pre-commit-packer.log
+
   if ! packer fmt "${ARGS[@]}" -- "$file"; then
     error=1
     echo
