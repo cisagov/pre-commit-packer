@@ -50,6 +50,5 @@ function util::get_unique_directory_paths() {
     ((++index))
   done
 
-  UNIQUE_PATHS=()
   while IFS='' read -r line; do UNIQUE_PATHS+=("$line"); done < <(printf '%s\n' "${paths[@]}" | sort --unique)
 }
