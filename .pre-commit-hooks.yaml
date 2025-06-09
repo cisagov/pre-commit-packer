@@ -16,8 +16,8 @@
   # This is necessary because Packer's plugin cache is not safe for concurrent access
   # per https://github.com/hashicorp/terraform/issues/32915#issuecomment-1485061999. If
   # this is not set to true then pre-commit itself will perform some level of
-  # parallelizationm across the files to run this hook against. Since we only care about
+  # parallelization across the files to run this hook against. Since we only care about
   # unique directory paths it should not impact performance and it will help prevent
   # issues arising from concurrent attempts to perform `packer init` on a particular
-  # directory gath.
+  # directory path.
   require_serial: true
