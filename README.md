@@ -1,6 +1,8 @@
 # pre-commit-packer #
 
 [![GitHub Build Status](https://github.com/cisagov/pre-commit-packer/workflows/build/badge.svg)](https://github.com/cisagov/pre-commit-packer/actions)
+[![License](https://img.shields.io/github/license/cisagov/pre-commit-packer)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/pre-commit-packer/workflows/CodeQL/badge.svg)](https://github.com/cisagov/pre-commit-packer/actions/workflows/codeql-analysis.yml)
 
 This is a set of [pre-commit](https://pre-commit.com) hooks intended for
 projects using [Packer](https://www.packer.io/).
