@@ -9,14 +9,20 @@ set -o pipefail
 # Globals:
 #   ARGS
 #   FILES
+#   NO_CD
 #######################################
 function util::parse_cmdline() {
   # Global variable arrays
   ARGS=()
   FILES=()
+  export NO_CD=0
 
   while (("$#")); do
     case "$1" in
+      --no-cd)
+        NO_CD=1
+        shift
+        ;;
       -*)
         if [ -f "$1" ]; then
           FILES+=("$1")

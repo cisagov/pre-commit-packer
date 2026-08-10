@@ -40,6 +40,7 @@ repos:
     hooks:
       - id: packer_fmt
       - id: packer_validate
+        args: [--no-cd] # Optionally disable changing working directory
 ```
 
 ## Contributing ##

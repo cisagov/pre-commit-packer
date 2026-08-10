@@ -7,11 +7,11 @@ set -o pipefail
 function packer_validate() {
   local exit_code=0
 
-  packer init . > /dev/null
+  packer init "$1" > /dev/null
 
   # Allow us to get output if the validation fails
   set +o errexit
-  validate_output=$(packer validate "${ARGS[@]}" . 2>&1)
+  validate_output=$(packer validate "${ARGS[@]}" "$1" 2>&1)
   exit_code=$?
   set -o errexit
 
@@ -42,8 +42,12 @@ pids=()
 for path in "${UNIQUE_PATHS[@]}"; do
   # Check each path in parallel
   {
-    pushd "$path" > /dev/null
-    packer_validate
+    if [[ $NO_CD -eq 1 ]]; then
+      packer_validate "$path"
+    else
+      pushd "$path" > /dev/null
+      packer_validate .
+    fi
   } &
   pids+=("$!")
 done
