@@ -28,6 +28,9 @@ for path in "${UNIQUE_PATHS[@]}"; do
   pids+=("$!")
 done
 
+exec 3>&1 < /dev/tty > /dev/tty
+tty_settings=$(stty -g)
+
 error=0
 exit_code=0
 for pid in "${pids[@]}"; do
@@ -36,6 +39,8 @@ for pid in "${pids[@]}"; do
     error=1
   fi
 done
+
+stty "$tty_settings"
 
 if [[ $error -ne 0 ]]; then
   exit 1
